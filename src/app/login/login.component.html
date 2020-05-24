@@ -1,0 +1,42 @@
+  <div class="page" style="background: url(assets/imgs/bg1.png);width: 100vw;height: 100vh;background-size: 100%;">
+    <form class="m-auto" [formGroup]="myForm">
+      <div class="text-center">
+        <img src="assets/imgs/login.png" class="rounded img2">
+      </div>
+      <br>
+      <div>
+        <h3 class="d-flex justify-content-center">用户登录</h3>
+      </div>
+      <!-- <p class="text-danger" *ngIf="myForm.invalid">表单无效</p> -->
+      <!-- <p>{{name$ | async}}</p> -->
+      <div class="form-group">
+        <label for="userName">用户名</label>
+        <input type="text" onkeyup="value=value.replace(/[\W]/g,'')" class="form-control" id="userName"
+          aria-describedby="输入用户名" name="userName" [formControl]="userName"
+          [ngClass]="{'is-invalid':userName.invalid,'is-valid':userName.valid}" style=" background:rgba(0, 0, 0, 0);"
+          placeholder="只能输入字母和数字">
+        <div class="valid-feedback">
+          用户名格式正确！
+        </div>
+        <div class="invalid-feedback">
+          <span *ngIf="userName.hasError('required')">用户名必须填写!</span>
+          <span *ngIf="!userName.hasError('required') && userName.hasError('invalidUser')">用户名必须以'a'开头填写！</span>
+          <span *ngIf="!userName.hasError('required')">用户名必须大于5位！</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">密码</label>
+        <input type="password" onkeyup="value=value.replace(/[\W]/g,'')" class="form-control" id="password"
+          name="password" [formControl]="password" [ngClass]="{'is-invalid':password.invalid,'is-valid':password.valid}"
+          style=" background:rgba(0, 0, 0, 0);" placeholder="只能输入字母和数字">
+        <div class="valid-feedback">
+          密码格式填写正确！
+        </div>
+        <div class="invalid-feedback">
+          密码必须大于8位！
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block" [disabled]="myForm.invalid"
+        (click)="validation()">提交</button>
+    </form>
+  </div>

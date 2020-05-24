@@ -1,0 +1,213 @@
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Jekyll v3.8.6">
+  <title>Dashboard Template · Bootstrap</title>
+
+  <link rel="canonical" href="https://v4.bootcss.com/docs/examples/dashboard/">
+
+  <link rel="apple-touch-icon" href="https://v4.bootcss.com/docs/assets/img/favicons/apple-touch-icon.png"
+    sizes="180x180">
+  <link rel="icon" href="https://v4.bootcss.com/docs/assets/img/favicons/favicon-32x32.png" sizes="32x32"
+    type="image/png">
+  <link rel="icon" href="https://v4.bootcss.com/docs/assets/img/favicons/favicon-16x16.png" sizes="16x16"
+    type="image/png">
+  <link rel="manifest" href="https://v4.bootcss.com/docs/assets/img/favicons/manifest.json">
+  <link rel="mask-icon" href="https://v4.bootcss.com/docs/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
+  <link rel="icon" href="https://v4.bootcss.com/docs/assets/img/favicons/favicon.ico">
+  <meta name="msapplication-config" content="/docs/assets/img/favicons/browserconfig.xml">
+  <meta name="theme-color" content="#563d7c">
+
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+  </style>
+  <!-- Custom styles for this template -->
+  <!-- <link href="./Bootstrap_files/dashboard.css" rel="stylesheet"> -->
+  <style type="text/css">
+    /* Chart.js */
+    @-webkit-keyframes chartjs-render-animation {
+      from {
+        opacity: 0.99
+      }
+
+      to {
+        opacity: 1
+      }
+    }
+
+    @keyframes chartjs-render-animation {
+      from {
+        opacity: 0.99
+      }
+
+      to {
+        opacity: 1
+      }
+    }
+
+    .chartjs-render-monitor {
+      -webkit-animation: chartjs-render-animation 0.001s;
+      animation: chartjs-render-animation 0.001s;
+    }
+
+  </style>
+</head>
+
+<h2 class="text-center">用户账号管理</h2>
+<br>
+
+<ng-template #templatesearch>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">查询</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="myForm">
+      <div class="form-group">
+        <label for="userName">账号</label>
+        <input type="text" onkeyup="value=value.replace(/[\W]/g,'')" class="form-control" id="userName" name="userName"
+          [formControl]='userName' placeholder="只能输入字母和数字">
+      </div>
+    </form>
+    <button type="button" class="btn btn-primary btn-lg btn-block" (click)="search();modalRef.hide()">查询</button>
+  </div>
+</ng-template>
+
+<ng-template #templateadd>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">添加</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="myForm">
+      <div class="form-group">
+        <label for="userName">账号</label>
+        <input type="text" onkeyup="value=value.replace(/[\W]/g,'')" class="form-control" id="userName" name="userName"
+          [formControl]='userName' placeholder="只能输入字母和数字">
+      </div>
+      <div class="form-group">
+        <label for="password">密码</label>
+        <input type="password" onkeyup="value=value.replace(/[\W]/g,'')" class="form-control" id="password"
+          name="password" [formControl]='password' placeholder="只能输入字母和数字">
+      </div>
+    </form>
+    <button type="button" class="btn btn-primary btn-lg btn-block" (click)="add();modalRef.hide()">添加</button>
+  </div>
+</ng-template>
+
+<ng-template #templateupdate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">修改</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="myForm">
+      <div class="form-group">
+        <label for="userName">账号</label>
+        <input type="text" onkeyup="value=value.replace(/[\W]/g,'')" class="form-control" id="userName" name="userName"
+          [formControl]='userName' placeholder="只能输入字母和数字">
+      </div>
+      <div class="form-group">
+        <label for="password">密码</label>
+        <input type="password" onkeyup="value=value.replace(/[\W]/g,'')" class="form-control" id="password"
+          name="password" [formControl]='password' placeholder="只能输入字母和数字">
+      </div>
+    </form>
+    <button type="button" class="btn btn-primary btn-lg btn-block" (click)="update();modalRef.hide()">修改</button>
+  </div>
+</ng-template>
+
+<ng-template #templatedelete>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">确定删除该条信息？</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="myForm">
+      <div class="form-group">
+        <label for="userName">账号</label>
+        <input type="text" onkeyup="value=value.replace(/[\W]/g,'')" class="form-control" id="userName" name="userName"
+          [formControl]='userName' placeholder="只能输入字母和数字">
+      </div>
+      <div class="form-group">
+        <label for="password">密码</label>
+        <input type="password" onkeyup="value=value.replace(/[\W]/g,'')" class="form-control" id="password"
+          name="password" [formControl]='password' placeholder="只能输入字母和数字">
+      </div>
+    </form>
+    <button type="button" class="btn btn-lg btn-block btn-outline-danger" (click)="delete();modalRef.hide()">删除</button>
+  </div>
+</ng-template>
+
+<div class="container" style="padding: 0 0 0 7rem;">
+  <div class="row">
+    <div class="col"><button type="button" class="btn btn-outline-primary" (click)="reset()"
+        (click)="openModal(templatesearch)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;查询&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+    </div>
+    <div class="col"><button type="button" class="btn btn-outline-primary" (click)="reset()"
+        (click)="openModal(templateadd)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;添加&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+    </div>
+    <div class="col"><button type="button" class="btn btn-outline-primary"
+        (click)="openModal(templateupdate)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;修改&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+    </div>
+    <div class="col"><button type="button" class="btn btn-outline-primary"
+        (click)="allsearch()">&nbsp;&nbsp;&nbsp;&nbsp;显示所有&nbsp;&nbsp;&nbsp;&nbsp;</button>
+    </div>
+    <!-- <div class="col"><button type="button" class="btn btn-outline-danger"
+        (click)="openModal(templatedelete)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;删除&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+    </div> -->
+  </div>
+</div>
+
+<br>
+
+<table class="table table-striped text-center">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">账号</th>
+      <th scope="col">密码</th>
+      <th scope="col">选中状态</th>
+      <th scope="col">删除</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor='let uslg of usslg$ | async; let i = index' (click)="select(uslg)" class="text-center">
+      <th scope="row">{{i+1}}</th>
+      <td>{{uslg.userName}}</td>
+      <td>{{uslg.password}}</td>
+      <td>
+        <input type="radio" class="form-check-input" id="exampleCheck1" name="1">
+        <span>选中</span>
+      </td>
+      <td><input type="button" class="btn btn-outline-danger" (click)="openModal(templatedelete)" value="删除"
+          style="border: none;text-decoration:underline"></td>
+    </tr>
+  </tbody>
+</table>

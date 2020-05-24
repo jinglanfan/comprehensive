@@ -1,0 +1,32 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  /* position: flex; */
+}
+
+.login-content {
+  height: 100vh;
+}
+
+.page {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  width: 35rem;
+}
+
+.img2 {
+  height: 70px;
+  width: 70px;
+}
+
+/* div {
+  border: 1px solid red;
+} */
